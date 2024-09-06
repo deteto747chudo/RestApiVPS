@@ -3,3 +3,15 @@ Flask-CORS
 Flask-RESTful
 psutil
 gunicorn==20.1.0
+requests
+websocket-client
+pillow
+python-dateutil
+emoji
+millify
+pre-commit
+colorama
+flask
+irc
+pandas
+pytz
