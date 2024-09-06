@@ -1,1 +1,5 @@
-pip install Flask Flask-CORS Flask-RESTful
+Flask 
+Flask-CORS 
+Flask-RESTful
+subprcess
+psutil
