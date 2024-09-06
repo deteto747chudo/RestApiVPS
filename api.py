@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import subprocess
 import psutil
-from flask_cors import CORS  # Import CORS
+from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -34,7 +34,7 @@ def status():
             p.name() == 'python3' and 'mainsetup.py' in p.cmdline() for p in psutil.process_iter()
         ),
         'flask': any(
-            p.name() == 'python3' and 'flask run' in p.cmdline() for p in psutil.process_iter()
+            p.name() == 'python3' and 'api.py' in p.cmdline() for p in psutil.process_iter()
         ),
     }
     return jsonify(status)
