@@ -97,6 +97,24 @@ def download_cheatsheet_html(cheatsheet_id):
     
     return send_file(html_file_path, as_attachment=True, download_name=f'{cheatsheet_id}.html')
 
+# Endpoint to delete a cheatsheet by ID
+@app.route('/delete_cheatsheet/<cheatsheet_id>', methods=['DELETE'])
+def delete_cheatsheet(cheatsheet_id):
+    file_path = os.path.join(CHEATSHEETS_DIR, f'{cheatsheet_id}.txt')
+    if not os.path.exists(file_path):
+        return jsonify({'status': 'error', 'message': 'Cheatsheet not found.'}), 404
+    
+    # Delete the file
+    os.remove(file_path)
+    
+    # Update metadata
+    metadata = load_cheatsheets_meta()
+    if cheatsheet_id in metadata:
+        del metadata[cheatsheet_id]
+        save_cheatsheets_meta(metadata)
+    
+    return jsonify({'status': 'success', 'message': 'Cheatsheet deleted successfully.'})
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5001))
     app.run(host='0.0.0.0', port=port)
